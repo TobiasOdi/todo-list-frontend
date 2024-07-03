@@ -1,6 +1,6 @@
 
 <form (ngSubmit)="login()">
-    <input type="text" name="email"  [{ngModel}]="email" required>
-    <input type="password" name="password" [{ngModel}]="password" required>
+    <input type="text" name="email"  {ngModel}="email" required>
+    <input type="password" name="password" {ngModel}="password" required>
     <button>Login</button>
 </form>
