@@ -1,6 +1,6 @@
 
-<form (ngSubmit)="loginWithUsernameAndPassword()">
-    <input type="text" name="username"  [(ngModel)]="username" required>
-    <input type="password" name="password" [(ngModel)]="password" required>
-    <button>Login</button>
+<form (ngSubmit)="login()">
+    <input type="text" name="username"  [(ngModel)]="username" required [disabled]="isEnabled">
+    <input type="password" name="password" [(ngModel)]="password" required [disabled]="isEnabled">
+    <button [disabled]="isEnabled">Login</button>
 </form>

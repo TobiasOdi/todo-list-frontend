@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +10,20 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
+
 export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
+  isEnabled:boolean = false;
+
+  constructor(public AuthService: AuthService) {}
 
   ngOnInit(): void {
       
   }
 
-  async loginWithUsernameAndPassword() {
+  async login() {
+    this.isEnabled = true;
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -34,15 +40,16 @@ export class LoginComponent implements OnInit {
     };
 
     try {
-      let resp = await fetch("http://127.0.0.1:8000/", requestOptions);
-      let json = await resp.json();
-      localStorage.setItem('token', json.token);
+      let resp = await this.AuthService.loginWithUsernameAndPassword(this.username, this.password);
+      console.log(resp);
+      //let resp = await fetch(environment.baseUrl + "/login/", requestOptions);
+      //let json = await resp.json();
+      //localStorage.setItem('token', json.token);
       // TODO: Redirect
     } catch(e){
       // Show error message
       console.error(e);
-
     }
+    this.isEnabled = false;
   }
-
 }
