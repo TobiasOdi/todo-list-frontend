@@ -1,0 +1,7 @@
+<h1 *ngIf="error"> {{error}} </h1>
+@for (todo of todos; track $index) {
+    <div>
+        <input type="checkbox" [checked]="todo.checked">
+        <div> {{ todo.title }}</div>
+    </div>
+}
