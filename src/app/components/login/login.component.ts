@@ -35,4 +35,8 @@ export class LoginComponent implements OnInit {
     }
     this.isEnabled = false;
   }
+
+  goToTodos() {
+    this.router.navigateByUrl('/todos');
+  }
 }
